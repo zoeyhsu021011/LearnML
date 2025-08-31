@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>Practice Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      gap: 20px;
+    }
+
+    .box {
+      width: 120px;
+      height: 120px;
+      background-color: #fff;
+      color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      border-radius: 8px;
+      user-select: none;
+    }
+
+    .dropdown {
+      display: none; /* 初始隱藏 */
+      position: absolute;
+      top: 130px;
+      left: 0;
+      background-color: #222;
+      border: 1px solid #555;
+      border-radius: 4px;
+      overflow: hidden;
+      z-index: 100;
+      width: 100%;
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 8px;
+      color: #4aa3ff;
+      text-decoration: none;
+    }
+
+    .dropdown a:hover {
+      background-color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="box" onclick="toggleDropdown(0)">方框1
+    <div class="dropdown">
+      <a href="page1.html">選項1</a>
+      <a href="page2.html">選項2</a>
+    </div>
+  </div>
+
+  <div class="box" onclick="toggleDropdown(1)">方框2
+    <div class="dropdown">
+      <a href="page3.html">選項1</a>
+      <a href="page4.html">選項2</a>
+    </div>
+  </div>
+
+  <div class="box" onclick="toggleDropdown(2)">方框3
+    <div class="dropdown">
+      <a href="page5.html">選項1</a>
+      <a href="page6.html">選項2</a>
+    </div>
+  </div>
+
+  <div class="box" onclick="toggleDropdown(3)">方框4
+    <div class="dropdown">
+      <a href="page7.html">選項1</a>
+      <a href="page8.html">選項2</a>
+    </div>
+  </div>
+
+  <script>
+    const boxes = document.querySelectorAll('.box');
+
+    function toggleDropdown(index) {
+      boxes.forEach((box, i) => {
+        const dropdown = box.querySelector('.dropdown');
+        if (i === index) {
+          dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        } else {
+          dropdown.style.display = 'none';
+        }
+      });
+    }
+
+    // 點頁面其他地方會關閉所有下拉選單
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.box')) {
+        boxes.forEach(box => {
+          box.querySelector('.dropdown').style.display = 'none';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
